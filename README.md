@@ -1,4 +1,4 @@
-# Laravel 11 專案儀表板
+# Laravel 12 專案儀表板
 
 藉助專案儀表板，您的團隊可以在同一處地方組織全部專案細節，分享回饋和進度，並且讓您的團隊工作更高效、對工作更負責，並且有信心解決最重要的事情。
 
@@ -35,8 +35,8 @@ $ npm run build
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/TorRUEe.png)
+![](https://i.imgur.com/GOsPRNg.png)
 > 將專案想像為某種為完成特定目標而進行的一組任務
 
-![](https://i.imgur.com/H27UQuq.png)
+![](https://i.imgur.com/TfG0ibt.png)
 > 將工作拆分成有明確的所有者和截止日期的小塊

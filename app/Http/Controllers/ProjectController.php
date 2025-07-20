@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Enums\PermissionEnum;
-use App\Models\User;
-use App\Models\Client;
-use App\Models\Project;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Client;
+use App\Models\Project;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(): View
     {
         $projects = Project::with(['user', 'client'])->paginate(10);
@@ -21,6 +24,9 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create(): View
     {
         $users = User::select(['id', 'name'])->get();
@@ -29,6 +35,9 @@ class ProjectController extends Controller
         return view('projects.create', compact('users', 'clients'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreProjectRequest $request): RedirectResponse
     {
         Project::create($request->validated());
@@ -36,6 +45,9 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Project $project): View
     {
         $users = User::select(['id', 'name'])->get();
@@ -44,6 +56,9 @@ class ProjectController extends Controller
         return view('projects.edit', compact('project', 'users', 'clients'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateProjectRequest $request, Project $project): RedirectResponse
     {
         $project->update($request->validated());
@@ -51,6 +66,9 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Project $project): RedirectResponse
     {
         Gate::authorize(PermissionEnum::DELETE_PROJECTS->value);
